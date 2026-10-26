@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Java / Maven build output
+**/target/
+*.class
+hs_err_pid*
+replay_pid*
+
+# Packaged desktop application
+/desktop/dist/
+
+# Local application data (database and scan records)
+/data/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# Logs
+*.log

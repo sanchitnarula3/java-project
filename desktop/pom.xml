@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.omr</groupId>
+  <artifactId>omr-desktop</artifactId>
+  <version>1.0.0</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <javafx.version>25.0.1</javafx.version>
+    <tomcat.version>10.1.61</tomcat.version>
+  </properties>
+  <dependencies>
+    <dependency><groupId>org.openjfx</groupId><artifactId>javafx-controls</artifactId><version>${javafx.version}</version></dependency>
+    <dependency><groupId>org.openjfx</groupId><artifactId>javafx-web</artifactId><version>${javafx.version}</version></dependency>
+    <dependency><groupId>org.apache.tomcat.embed</groupId><artifactId>tomcat-embed-core</artifactId><version>${tomcat.version}</version></dependency>
+    <dependency><groupId>org.apache.tomcat.embed</groupId><artifactId>tomcat-embed-jasper</artifactId><version>${tomcat.version}</version></dependency>
+    <dependency><groupId>org.openpnp</groupId><artifactId>opencv</artifactId><version>4.9.0-0</version></dependency>
+  </dependencies>
+  <build>
+    <resources>
+      <resource>
+        <directory>${project.basedir}/../target</directory>
+        <includes><include>omr-mcq-system.war</include></includes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+        <configuration><release>21</release></configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.openjfx</groupId><artifactId>javafx-maven-plugin</artifactId><version>0.0.8</version>
+        <configuration><mainClass>com.omr.desktop.DesktopLauncher</mainClass></configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId><version>3.8.1</version>
+        <executions><execution><id>copy-runtime-dependencies</id><phase>package</phase><goals><goal>copy-dependencies</goal></goals>
+          <configuration><includeScope>runtime</includeScope><outputDirectory>${project.build.directory}/app-input</outputDirectory></configuration>
+        </execution></executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.4.2</version>
+        <configuration><archive><manifest><mainClass>com.omr.desktop.DesktopLauncher</mainClass></manifest></archive></configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
